@@ -7,21 +7,20 @@
  */
 void add_to_stack(stack_t **new_node, __attribute__((unused))unsigned int ln)
 {
-        stack_t *tmp;
+	stack_t *tmp;
 
-        if (new_node == NULL || *new_node == NULL)
-                exit(EXIT_FAILURE);
-        if (head == NULL)
-        {
-                head = *new_node;
-                return;
-        }
-        tmp = head;
-        head = *new_node;
-        head->next = tmp;
-        tmp->prev = head;
+	if (new_node == NULL || *new_node == NULL)
+		exit(EXIT_FAILURE);
+	if (head == NULL)
+	{
+		head = *new_node;
+		return;
+	}
+	tmp = head;
+	head = *new_node;
+	head->next = tmp;
+	tmp->prev = head;
 }
-
 
 /**
  * r_file - reads a file
@@ -49,21 +48,20 @@ void r_file(FILE *fd)
  */
 void pop_top(stack_t **stack, unsigned int line_number)
 {
-        stack_t *tmp;
+	stack_t *tmp;
 
-        if (stack == NULL || *stack == NULL)
-                error_2(7, line_number);
+	if (stack == NULL || *stack == NULL)
+		error_2(7, line_number);
 
-        tmp = *stack;
-        *stack = tmp->next;
-        if (*stack != NULL)
-                (*stack)->prev = NULL;
-        free(tmp);
+	tmp = *stack;
+	*stack = tmp->next;
+	if (*stack != NULL)
+		(*stack)->prev = NULL;
+	free(tmp);
 }
 
-
 /**
- * find_func - find the appropriate function for the opcode
+ * search_func - find the appropriate function for the opcode
  * @opcode: opcode
  * @value: argument of opcode
  * @format:  storage format. If 0 Nodes will be entered as a stack.
@@ -71,7 +69,7 @@ void pop_top(stack_t **stack, unsigned int line_number)
  * if 1 nodes will be entered as a queue.
  * Return: void
  */
-void find_func(char *opcode, char *value, int ln, int format)
+void search_func(char *opcode, char *value, int ln, int format)
 {
 	int i;
 	int flag;
@@ -117,17 +115,18 @@ void find_func(char *opcode, char *value, int ln, int format)
  */
 void swap_nodes(stack_t **stack, unsigned int line_number)
 {
-        stack_t *tmp;
+	stack_t *tmp;
 
-        if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-                error_2(8, line_number, "swap");
-        tmp = (*stack)->next;
-        (*stack)->next = tmp->next;
-        if (tmp->next != NULL)
-                tmp->next->prev = *stack;
-        tmp->next = *stack;
-        (*stack)->prev = tmp;
-        tmp->prev = NULL;
-        *stack = tmp;
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+		error_2(8, line_number, "swap");
+	tmp = (*stack)->next;
+	(*stack)->next = tmp->next;
+
+	if (tmp->next != NULL)
+		tmp->next->prev = *stack;
+	tmp->next = *stack;
+	(*stack)->prev = tmp;
+	tmp->prev = NULL;
+	*stack = tmp;
 }
 

@@ -76,8 +76,8 @@ void rotr(stack_t **stack, __attribute__((unused))unsigned int ln)
  */
 void nop(stack_t **stack, unsigned int line_number)
 {
-        (void)stack;
-        (void)line_number;
+	(void)stack;
+	(void)line_number;
 }
 
 /**
@@ -87,14 +87,14 @@ void nop(stack_t **stack, unsigned int line_number)
  */
 void add_nodes(stack_t **stack, unsigned int line_number)
 {
-        int sum;
+	int sum;
 
-        if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-                error_2(8, line_number, "add");
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+		error_2(8, line_number, "add");
 
-        (*stack) = (*stack)->next;
-        sum = (*stack)->n + (*stack)->prev->n;
-        (*stack)->n = sum;
-        free((*stack)->prev);
-        (*stack)->prev = NULL;
+	(*stack) = (*stack)->next;
+	sum = (*stack)->n + (*stack)->prev->n;
+	(*stack)->n = sum;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
 }

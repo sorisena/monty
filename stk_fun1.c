@@ -8,13 +8,13 @@
 
 void open_file(char *file_name)
 {
-        FILE *fd = fopen(file_name, "r");
+	FILE *fd = fopen(file_name, "r");
 
-        if (file_name == NULL || fd == NULL)
-                error_1(2, file_name);
+	if (file_name == NULL || fd == NULL)
+		error_1(2, file_name);
 
-        r_file(fd);
-        fclose(fd);
+	r_file(fd);
+	fclose(fd);
 }
 
 /**
@@ -49,24 +49,27 @@ void display_stack(stack_t **stack, unsigned int line_number)
 
 int parse_line(char *buffer, int line_number, int format)
 {
-        char *opcode, *value;
-        const char *delim = "\n ";
+	char *opcode, *value;
+	const char *delim = "\n ";
 
-        if (buffer == NULL)
-                error_1(4);
+	if (buffer == NULL)
+		error_1(4);
 
-        opcode = strtok(buffer, delim);
-        if (opcode == NULL)
-                return (format);
-        value = strtok(NULL, delim);
+	opcode = strtok(buffer, delim);
+	if (opcode == NULL)
+		return (format);
+	value = strtok(NULL, delim);
 
-        if (strcmp(opcode, "stack") == 0)
-                return (0);
-        if (strcmp(opcode, "queue") == 0)
-                return (1);
+	if (strcmp(opcode, "stack") == 0)
 
-        find_func(opcode, value, line_number, format);
-        return (format);
+		return (0);
+	if (strcmp(opcode, "queue") == 0)
+
+		return (1);
+
+	search_func(opcode, value, line_number, format);
+
+	return (format);
 }
 
 /**
